@@ -5,7 +5,7 @@ on:
     branches:
         - "master"
     paths:
-        - 'app/**'  
+        - 'app/**'
 
 jobs:
   unit_test:
@@ -24,7 +24,7 @@ jobs:
         run: cd app && npm install 
 
       - name: Run Unit Tests with Jest
-        run: npm run test
+        run: cd app && npm install -g jest && npm run test
 
   build_and_push_to_registry:
     name: Push Docker image to Docker Hub
@@ -42,9 +42,9 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@3b5e8027fcad23fda98b2e3ac259d8d67585f671
         with:
-          context: .
+          context: app
           file: ./Dockerfile
           push: true
-          tags: josecyber/api-bus-schedules:${{ github.sha }}
+          tags: josecyber/app-image-signed:${{ github.sha }}
   
   
