@@ -1,0 +1,26 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: app-signed-image-set
+  namespace: argocd
+spec:
+  generators:
+    - list:
+        elements:
+          - name: app-signed-image
+  template:
+    metadata:
+      name: '{{name}}'
+    spec:
+      project: signed-images
+      source:
+        repoURL: https://github.com/Jose-cyber/cosign-2sign-images-and-kyverno.git
+        targetRevision: HEAD
+        path: k8s/app/
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: app
+      syncPolicy:
+        automated:
+          prune: false
+          selfHeal: false

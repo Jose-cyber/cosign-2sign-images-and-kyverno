@@ -79,6 +79,4 @@ jobs:
           
           digest=$(docker inspect $latest_image | jq -r '.[0].RepoDigests[0]')
           
-          echo "a porra do digest ai: $digest"
-
           cosign sign --key .keys/cosign.key $digest -y

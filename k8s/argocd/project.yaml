@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: signed-images
+  namespace: argocd
+spec:
+  description:
+  sourceRepos:
+    - 'https://github.com/Jose-cyber/cosign-2sign-images-and-kyverno.git'
+  destinations:
+    - namespace: '*'  
+      server: https://kubernetes.default.svc 
+  clusterResourceWhitelist:
+    - group: '*' 
+      kind: '*'
+  namespaceResourceWhitelist:
+    - group: '*'  
+      kind: '*'
