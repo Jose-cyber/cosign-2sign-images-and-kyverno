@@ -1,0 +1,36 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-signed-dp
+  namespace: app
+  labels:
+    app: app-signed
+spec:
+  selector:
+    matchLabels:
+      app: app-signed
+  replicas: 1
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: app-signed
+    spec:
+      containers:
+      - name: app-signed
+        image: josecyber/app-image-signed:latest
+        resources:
+          requests:
+            cpu: 100m
+            memory: 100Mi
+          limits:
+            cpu: 100m
+            memory: 100Mi
+        envFrom:
+        - configMapRef:
+            name: app-signed-cfg

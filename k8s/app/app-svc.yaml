@@ -1,0 +1,14 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-signed-svc
+  namespace: app
+spec:
+  selector:
+    app: app-signed
+  type: ClusterIP
+  ports:
+  - name: app-signed
+    protocol: TCP
+    port: 8080
