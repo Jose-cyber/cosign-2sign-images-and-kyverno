@@ -63,7 +63,7 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Install jq
-        run: apt install jq -y
+        run: sudo apt install jq -y
       
       - name: Setup Cosign
         uses: sigstore/cosign-installer@v3.5.0
