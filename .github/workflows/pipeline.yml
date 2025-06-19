@@ -74,9 +74,11 @@ jobs:
           COSIGN_PASSWORD: ""
         run: |
           latest_image="josecyber/app-image-signed:${{ github.sha }}"
-
+          
           docker pull $latest_image
           
-          image=$(docker inspect $latest_image | jq .[].RepoDigests[0])
+          digest=$(docker inspect $latest_image | jq .[].RepoDigests[0])
+          
+          echo "a porra do digest ai: $digest"
 
-          cosign sign --key .keys/cosign.key $image -y
+          cosign sign --key .keys/cosign.key $digest -y
