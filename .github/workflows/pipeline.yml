@@ -77,7 +77,7 @@ jobs:
           
           docker pull $latest_image
           
-          digest=$(docker inspect $latest_image | jq .[].RepoDigests[0])
+          digest=$(docker inspect $latest_image | jq -r '.[0].RepoDigests[0]')
           
           echo "a porra do digest ai: $digest"
 
