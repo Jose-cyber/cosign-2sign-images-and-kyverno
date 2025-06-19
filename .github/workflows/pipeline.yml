@@ -4,8 +4,8 @@ on:
   push:
     branches:
         - "master"
-    # paths:
-    #     - 'app/**'
+    paths:
+        - 'app/**'
 
 jobs:
   unit_test:
