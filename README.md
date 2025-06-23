@@ -7,16 +7,19 @@ Required:
 
 ## Cosign 
 Generating the key pair, using cosign:
+
 '''
 cosign generate-key-pair
 '''
 
-sign image
+sign image:
+
 '''
 cosign sign --key .keys/cosign.key josecyber/app-image-signed
 '''
 
-verify
+verify image:
+
 '''
 cosign verify --key .keys/cosign.pub josecyber/app-image-signed
 '''
@@ -31,12 +34,15 @@ kind create cluster --config=k8s/cluster.yaml
 ## Install nginx in cluster:
 
 '''
+
 kubectl --namespace ingress-nginx apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/main/deploy/static/provider/kind/deploy.yaml
+
 '''
 
 ## Deploy the app
 
 Deploy the app:
+
 '''
 kubectl apply -f k8s/app/
 '''
