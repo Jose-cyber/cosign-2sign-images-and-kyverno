@@ -19,4 +19,3 @@ spec:
   tls:
   - hosts:
     - test.localdev.me
-    secretName: localdev-tls
