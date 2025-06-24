@@ -1,6 +1,19 @@
 const request = require('supertest');
-const app = require('../src/index');
+const app = require('../src/infra/server');
 
+let server;
+let agent;
+
+beforeAll((done) => {
+  server = app.listen(() => {
+    agent = request.agent(server);
+    done();
+  });
+});
+
+afterAll((done) => {
+  server.close(done);
+});
 
 describe('E2E', () => {
     // method get in  /
