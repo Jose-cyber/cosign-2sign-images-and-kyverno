@@ -5,34 +5,34 @@ It's an example of Node.js application using express.
 ## Run local
 
 Install dependencies:
-<pre>
+```bash
 npm install
-</pre>
+```
 
 Run:
-<pre>
+```bash
 npm run dev
-</pre>
+```
 or
-<pre>
+```bash
 node src/index.js
-</pre>
+```
 
 ## Tests
 run:
-<pre>
+```bash
 npm run test
-</pre>
+```
 
 ## Build docker image
 
 Build:
-<pre>
+```bash
 docker build -t josecyber/app-image-signed -f Dockerfile .
-</pre>
+```
 
 ## Run docker image
 
-<pre>
+```bash
 docker run -d -p8080:8080 josecyber/app-image-signed
-</pre>
+```
