@@ -80,3 +80,32 @@ jobs:
           digest=$(docker inspect $latest_image | jq -r '.[0].RepoDigests[0]')
           
           cosign sign --key .keys/cosign.key $digest -y --tlog-upload=false
+  Deploy:
+    name: Update Deployment Image
+    needs: sign_image_using_cosign
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install yq
+        run: |
+          sudo apt update
+          sudo apt install -y yq
+
+      - name: Update image in YAML
+        run: |
+          old_image=$(yq -r '.spec.template.spec.containers[0].image' k8s/app/app-dp.yaml)
+          new_image="josecyber/app-image-signed:${{ github.sha }}"
+
+          echo "Replacing image: $old_image -> $new_image"
+          sed -i "s|$old_image|$new_image|g" k8s/app/app-dp.yaml
+
+      - name: Commit and push changes
+        run: |
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+
+          git add k8s/app/app-dp.yaml
+          git commit -m "Update image to $new_image [CI SKIP]" || echo "No changes to commit"
+          git push
