@@ -23,7 +23,7 @@ spec:
     spec:
       containers:
       - name: app-signed
-        image: josecyber/app-image-signed:6b81e98b1cc292ba80117a8931acd141ae9fd73f
+        image: josecyber/app-image-signed:b730f567bbd4e2c3c2c7f1f982d90f31e0d06c42
         resources:
           requests:
             cpu: 100m
