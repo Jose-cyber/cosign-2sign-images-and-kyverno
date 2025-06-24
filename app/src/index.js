@@ -7,5 +7,4 @@ app.listen(port, ()=>{
   console.info(`Server runing in port: ${port}`)
 })
 
-
 module.exports = app
