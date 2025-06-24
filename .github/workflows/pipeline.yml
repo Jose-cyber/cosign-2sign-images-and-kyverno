@@ -79,4 +79,4 @@ jobs:
           
           digest=$(docker inspect $latest_image | jq -r '.[0].RepoDigests[0]')
           
-          cosign sign --key .keys/cosign.key $digest -y
+          cosign sign --key .keys/cosign.key $digest -y --tlog-upload=false
