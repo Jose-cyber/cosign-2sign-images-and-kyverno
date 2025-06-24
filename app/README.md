@@ -34,5 +34,5 @@ docker build -t josecyber/app-image-signed -f Dockerfile .
 ## Run docker image
 
 <pre>
-docker run -d --env-file=.env -p8080:8080 josecyber/app-image-signed
+docker run -d -p8080:8080 josecyber/app-image-signed
 </pre>
